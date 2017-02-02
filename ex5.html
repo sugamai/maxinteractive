@@ -5,9 +5,9 @@
 <style>
 div.all {position:absolute; top:0; left:0; width:100%; }
 div.bg-black { padding-top:300px; background: black; margin:0; color:#ffffff;
-  font:400 38px 'Montserrat', sans-serif; text-align:left; line-height:70%}
+  font:400 38px 'Montserrat', sans-serif; text-align:left; line-height:70%;}
 div.tilt { letter-spacing:-22px; font:700 90px 'Montserrat', sans-serif; margin-top:-23px;
-  -webkit-transform:rotate(180deg); /* Chrome, Safari, Opera */transform:rotate(180deg); }
+  -webkit-transform:rotate(180deg); /* Chrome, Safari, Opera */transform:rotate(180deg);}
 div.contents { margin-top:20px; }
 .usa { letter-spacing:1px; font:400 11px 'Montserrat', sans-serif; }
 p { letter-spacing:-3px; font:300 12px 'Montserrat', sans-serif;
@@ -17,7 +17,20 @@ li { background-color:#ffffff; float:left; margin:10px 10px 15px 0px; text-align
 h2 { border-top:2px solid #000000; padding:0; margin:0 0 0 15px; float:right;
   font:700 12px 'Montserrat', sans-serif; text-transform:lowercase;}
 .bignumber { vertical-align:top; font-size:90px; font-weight:900; position:relative; top:-22px; right:-8px;}
-li p { letter-spacing:-6px; font-size:24px; }
+li p { letter-spacing:-6px; font-size:24px;
+  -webkit-animation:shadechange 3s infinite alternate;}
+  @-webkit-keyframes shadechange {
+   0% {color: #000000;}
+   10% {color: #333333;}
+   20% {color: #666666;}
+   30% {color: #999999;}
+   40% {color: #aaaaaa;}
+   50% {color: #cccccc;}
+   60% {color: #eeeeee;}
+   70% {color: #efefef;}
+   80% {color: #ffffff;}
+   90% {color: #ffffff;}
+   100% {color: #ffffff;}}
 a { position:fixed; bottom:20px; right:0px; background-color:#333333; padding:10px;
     font:900 12px Helvetica, Arial, sans-serif; color:#ffffff; line-height:180%;
     text-align:center; text-transform:uppercase; text-decoration:none;}
