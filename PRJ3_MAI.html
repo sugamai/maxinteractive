@@ -1,0 +1,488 @@
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<title>2090:Project 3</title>
+
+<style>
+html,
+body {
+  margin: 0; padding: 0;
+}
+.container {
+ width: 960px;
+ margin: 300px auto 450px auto;
+ text-align: center;
+ font:500 32px 'IM Fell Great Primer', serif;
+ color:#777;
+}
+.hiMom {
+  font-size:48px;
+}
+/* hand waving effect */
+span.wave {
+  font-size: 68px;
+}
+span.hand {
+  opacity: 0.7; left: 50%;
+  display: block; position: absolute;
+
+  -webkit-transform: translate(-50%, 0) rotate(-10deg);
+          transform: translate(-50%, 0) rotate(-10deg);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  -webkit-animation: wave 350ms ease-in-out infinite alternate;
+          animation: wave 350ms ease-in-out infinite alternate;
+}
+@-webkit-keyframes wave {
+  0% {
+    -webkit-transform: translate(-50%, 0) rotate(15deg);
+            transform: translate(-50%, 0) rotate(15deg); }
+  100% {
+    -webkit-transform: translate(-50%, 0) rotate(-10deg);
+            transform: translate(-50%, 0) rotate(-10deg); }
+}
+@keyframes wave {
+  0% {
+    -webkit-transform: translate(-50%, 0) rotate(15deg);
+            transform: translate(-50%, 0) rotate(15deg); }
+  100% {
+    -webkit-transform: translate(-50%, 0) rotate(-10deg);
+            transform: translate(-50%, 0) rotate(-10deg); }
+}
+/* END hand waving effect */
+
+/* typing indicator speach bubble effect */
+.typing-indicator {
+  background-color: #eff0f2;
+  will-change: transform;
+  width: auto;
+  border-radius: 20px;
+  padding: 11px; margin: 0 auto;
+  display: table;
+  position: relative;
+  -webkit-animation: 2s bulge infinite ease-out;
+          animation: 2s bulge infinite ease-out;
+}
+.typing-indicator::before, .typing-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: -1px;
+  height: 10px; width: 10px;
+  border-radius: 50%;
+  background-color: #eff0f2;;
+}
+.typing-indicator::after {
+  height: 5px; width: 5px;
+  left: -5px; bottom: -5px;
+}
+.typing-indicator span {
+  height: 8px; width: 8px;
+  float: left;
+  margin: 0 1px;
+  background-color: #9E9EA1;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+.typing-indicator span:nth-of-type(1) {
+  -webkit-animation: 1s blink infinite 0.3333s;
+          animation: 1s blink infinite 0.3333s;
+}
+.typing-indicator span:nth-of-type(2) {
+  -webkit-animation: 1s blink infinite 0.6666s;
+          animation: 1s blink infinite 0.6666s;
+}
+.typing-indicator span:nth-of-type(3) {
+  -webkit-animation: 1s blink infinite 0.9999s;
+          animation: 1s blink infinite 0.9999s;
+}
+@-webkit-keyframes blink {
+  50% {opacity: 1; }
+}
+@keyframes blink {
+  50% { opacity: 1; }
+}
+@-webkit-keyframes bulge {
+  50% { -webkit-transform: scale(1.05);
+               transform: scale(1.05); }
+}
+@keyframes bulge {
+  50% { -webkit-transform: scale(1.05);
+                transform: scale(1.05); }
+}
+/* END typing indicator speach bubble effect */
+.blinking {
+  animation: blinking 3.5s infinite;
+}
+@keyframes blinking {
+  0% {    opacity: 1; }
+  40% {   opacity: 1; }
+  40.1% { opacity: 0; }
+  50% {   opacity: 0; }
+  50.1% { opacity: 1; }
+  60% {   opacity: 1; }
+  60.1% { opacity: 0; }
+  100% {  opacity: 0; }
+}
+.age78 {
+  color:#cdcdcd;
+  font-size:60px;
+}
+.title {
+  color:#cdcdcd;
+  font-size:270px;
+  line-height:0;
+}
+.beforetrumpimg {
+  color:#cdcdcd;
+  font-size:28px;
+}
+.gray {
+  color:#cdcdcd;
+}
+.darkgray {
+  color:#555;
+}
+.sm24 {
+  font-size:24px;
+}
+.sm21 {
+  font-size:21px;
+}
+.sm18 {
+  font-size:18px;
+}
+.sm14 {
+  font-size:14px;
+}
+.midgray {
+  color:#999;
+}
+.lightmgray {
+  color:#bbb
+}
+img.trump {
+  position: absolute;
+  width: 1440px; height: auto;
+  margin-top: -500px; margin-left: -720px;
+  padding:0;
+  opacity: 0.4;
+  z-index: 99;
+}
+img.nature {
+  position: absolute;
+  width: 1440px; height: auto;
+  margin-top: -500px; margin-left: -720px;
+  padding:0;
+  opacity: 0.1;
+  z-index: 99;
+}
+div.whiteout{
+  position: absolute;
+  width: 1440px; height:960px;
+  margin: 0; padding:0;
+  background-color: #fff;
+  left:0; top:0;
+  z-index: 99;
+}
+.askq {
+  color:#cdcdcd;
+  font-size:120px;
+  line-height:0.5;
+}
+.lastsentence {
+  font-size:12px;
+  color:#333;
+}
+/* smoky type flying effect */
+span.smoke {
+  display: inline-block;
+  text-shadow: 0 0 0 whitesmoke;
+  -webkit-animation: smoky 3s 1s both;
+          animation: smoky 3s 1s both;
+}
+span.smoke:nth-child(even) {
+  -webkit-animation-name: smoky-mirror;
+          animation-name: smoky-mirror;
+}
+@-webkit-keyframes smoky {
+  60% {  text-shadow: 0 0 80px whitesmoke; }
+  to {  -webkit-transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
+         transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
+         text-shadow: 0 0 40px whitesmoke;
+         opacity: 0; }
+}
+@keyframes smoky {
+  60% {  text-shadow: 0 0 80px whitesmoke; }
+  to {  -webkit-transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
+         transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
+         text-shadow: 0 0 40px whitesmoke;
+         opacity: 0; }
+}
+@-webkit-keyframes smoky-mirror {
+  60% {  text-shadow: 0 0 80px whitesmoke; }
+  to {  -webkit-transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
+         transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
+         text-shadow: 0 0 40px whitesmoke;
+         opacity: 0; }
+}
+@keyframes smoky-mirror {
+  60% {  text-shadow: 0 0 80px whitesmoke; }
+  to {  -webkit-transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
+         transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
+         text-shadow: 0 0 40px whitesmoke;
+         opacity: 0; }
+}
+span:nth-of-type(1) {
+  -webkit-animation-delay: 1.1s;
+          animation-delay: 1.1s;
+}
+span:nth-of-type(5) {
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
+}
+span:nth-of-type(10) {
+  -webkit-animation-delay: 1.3s;
+          animation-delay: 1.3s;
+}
+span:nth-of-type(9) {
+  -webkit-animation-delay: 1.4s;
+          animation-delay: 1.4s;
+}
+span:nth-of-type(2) {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+span:nth-of-type(6) {
+  -webkit-animation-delay: 1.6s;
+          animation-delay: 1.6s;
+}
+span:nth-of-type(17) {
+  -webkit-animation-delay: 1.7s;
+          animation-delay: 1.7s;
+}
+span:nth-of-type(8) {
+  -webkit-animation-delay: 1.8s;
+          animation-delay: 1.8s;
+}
+span:nth-of-type(4) {
+  -webkit-animation-delay: 1.9s;
+          animation-delay: 1.9s;
+}
+span:nth-of-type(3) {
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+}
+span:nth-of-type(11) {
+  -webkit-animation-delay: 2.1s;
+          animation-delay: 2.1s;
+}
+span:nth-of-type(12) {
+  -webkit-animation-delay: 2.2s;
+          animation-delay: 2.2s;
+}
+span:nth-of-type(16) {
+  -webkit-animation-delay: 2.3s;
+          animation-delay: 2.3s;
+}
+span:nth-of-type(14) {
+  -webkit-animation-delay: 2.4s;
+          animation-delay: 2.4s;
+}
+span:nth-of-type(15) {
+  -webkit-animation-delay: 2.5s;
+          animation-delay: 2.5s;
+}
+span:nth-of-type(13) {
+  -webkit-animation-delay: 2.6s;
+          animation-delay: 2.6s;
+}
+span:nth-of-type(7) {
+  -webkit-animation-delay: 2.7s;
+          animation-delay: 2.7s;
+}
+span:nth-of-type(18) {
+  -webkit-animation-delay: 2.8s;
+          animation-delay: 2.8s;
+}
+span:nth-of-type(19) {
+  -webkit-animation-delay: 2.9s;
+          animation-delay: 2.9s;
+}
+span:nth-of-type(20) {
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+}
+span:nth-of-type(21) {
+  -webkit-animation-delay: 3.1s;
+          animation-delay: 3.1s;
+}
+/* END smoky type flying effect */
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div id="textswap">
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span class="hiMom">Hi Mom<span class="wave"><span class="hand">&#128075;</span></span></span>
+    <span>This is Emma</span>
+    <span>your daughter</span>
+    <span class="age78">75 years old now</span>
+    <span>and sending this message from-</span>
+    <span class="title">2090</span>
+    <div class="typing-indicator blinking"><span></span><span></span><span></span></div>
+    <span>Wait, do not shut down!</span>
+    <span>This is not <span class="darkgray">scam</span> or <span class="darkgray">hacked.</span></span>
+    <span>I just want to <span class="darkgray">chat with you.</span></span>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span>Now you're in <span class="darkgray">2017</span> right?</span>
+    <span class="beforetrumpimg">Your world will <span class="smoke">s</span><span class="smoke">u</span><span class="smoke">f</span><span class="smoke">f</span><span class="smoke">e</span><span class="smoke">r</span> very soon.</span>
+    <img class="trump" src="img/trump.jpg">
+    <span>Many things had been changed since I was a kid.</span>
+    <span>We no longer cook-</span>
+    <span>and we eat packed <span class="gray">synthetic food-</span></span>
+    <span class="gray sm24">through the government distribution.</span>
+    <span>We no longer communicate face to face</span>
+    <span>because we cannot go outside-</span>
+    <span>due to <span class="gray">severe weather and pollution-</span></span>
+    <span>caused by <span class="gray">nuculear world war.</span></span>
+    <span>We no longer enjoy nature since <span class="gray">none left.</span></span>
+    <span>Beautiful nature is only available on Virtual Reality.</span>
+    <img class="nature" src="img/nature.jpg">
+    <span><span class="gray"><span class="smoke">H</span><span class="smoke">u</span><span class="smoke">m</span><span class="smoke">a</span><span class="smoke">n</span><span class="smoke">s</span></span> had destroyed the planet.</span>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span class="gray">Everything had been kept under <span class="midgray">surveillance-</span></span>
+    <span class="gray">under Artificial Intelligence</span>
+    <span>because humans were <span class="gray"><span class="smoke">s</span><span class="smoke">t</span><span class="smoke">u</span><span class="smoke">p</span><span class="smoke">i</span><span class="smoke">d</span> <span class="smoke">a</span><span class="smoke">n</span><span class="smoke">d</span> <span class="smoke">i</span><span class="smoke">g</span><span class="smoke">n</span><span class="smoke">o</span><span class="smoke">r</span><span class="smoke">a</span><span class="smoke">n</span><span class="smoke">t</span><span class="smoke">.</span></span></span>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span class="sm24">We assumed <span class="gray">someone</span> will take care of important thing</span>
+    <span class="gray sm24">but no one did</span>
+    <span class="gray">so AI took over our society</span>
+    <span class="gray">and make decision for us.</span>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span>Mom</span>
+    <span>Help US.</span>
+    <span class="gray">You can change the world</span>
+    <span class="gray sm21">before it's too late.</span>
+    <span>EVEN</span>
+    <span class="gray sm18">SMALL</span>
+    <span class="gray sm14">TINY</span>
+    <span class="sm14">CHANGE</span>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>
+    <span class="gray">Did you notice the <span class="sm24 lightmgray">CHANGE</span></span>
+    <span class="gray">just now</span>
+    <span class="gray">right here</span>
+    <span>right in front of you?</span>
+    <div class="whiteout"></div>
+    <span class="askq">Ask questions</span>
+    <span class="lastsentence">You are responsible for your choice</span>
+  </div>
+</div>
+
+<!--for bg color changing effect-->
+<script type="text/javascript">
+  // This JS code comes from Charlie Loyd [ @vruba ], who wrote a wonderful little
+  			// missive here: http://basecase.org/2012/11/diadem/
+  			// He's given me permission to pilfer his codes. Thank you, Charlie.
+
+  			// BEGIN COLOR-SCHNAZZIE-IFIER.
+
+  			// Hi. This is not really production-quality code, just something I
+  			// patched together for an experimental essay. But if you have
+  			// questions, I'd be happy to answer them.
+
+  			var pi = Math.PI;
+  			var sin = Math.sin;
+  			var floor = Math.floor;
+  			var abs = Math.abs;
+  			var pow = Math.pow;
+
+  			// Today in Bad Variable Names, we visit something I chose to call “epoch”…
+  			var epoch = function() { return new Date().getTime()/2000; }
+  			// The last number in that line controls color cycle speed.
+
+  			function clip(min, n, max) {
+  				if (min > n) { return min; }
+  				if (max < n) { return max; }
+  				return n;
+  			}
+
+  			// This is an adaptation of the rainbow function described at
+  			// http://basecase.org/env/on-rainbows (K is for @skimbrel, my
+  			// buddy who had the central insight that sines work for this).
+  			// We lighten and desaturate it a little.
+  			function K(h) {
+  				h *= -1;
+  				var r = sin(pi * h);
+  				var g = sin(pi * (h + 1/3));
+  				var b = sin(pi * (h + 2/3));
+  				return [r, g, b].map(function (c) {
+  					c = c*c;
+  					c = 0.85 + (c*0.06); // HURRRR
+  					return floor(c * 255);
+  				});
+  			}
+
+  			function recolor(plus) {
+  				var cycle = ((epoch()/50) + plus) % 1;
+  				var color = K(cycle);
+  				color = 'rgb(' + color.join(',') + ')';
+  				$('body').css({'background-color': color});
+  			}
+
+  			$(document).ready(function(){
+  				recolor(0);
+  				// The last number in this line is the update interval (in ms):
+  				a = function() { setInterval(function() { recolor(0) }, 100); }
+  				a();
+  			});
+</script>
+<!--for main text changing effect-->
+<script type="text/javascript">
+(function($){
+    $.fn.extend({
+        rotaterator: function(options) {
+
+            var defaults = {
+                //fadeSpeed: 500,
+                //pauseSpeed: 100,
+				child:null
+            };
+
+            var options = $.extend(defaults, options);
+
+            return this.each(function() {
+                  var o =options;
+                  var obj = $(this);
+                  var items = $(obj.children(), obj);
+				  items.each(function() {$(this).hide();})
+				  if(!o.child){var next = $(obj).children(':first');
+				  }else{var next = o.child;
+				  }
+				  $(next).fadeIn(o.fadeSpeed, function() {
+            var nextDelay = $(next).is(':last-child') ? o.pauseSpeed + 300000 : o.pauseSpeed
+          $(next).delay(nextDelay).fadeOut(o.fadeSpeed, function() {
+            var next = $(this).next();
+            if (next.length == 0)     {
+      return false;
+    }
+              $(obj).rotaterator({child: next,fadeSpeed: o.fadeSpeed,pauseSpeed: o.pauseSpeed});
+          })
+        });
+      });
+    }
+  });
+})(jQuery);
+ $(document).ready(function() {
+        $('#textswap').rotaterator({fadeSpeed:1000, pauseSpeed:1800});
+ });
+ </script>
+
+</body>
+</html>

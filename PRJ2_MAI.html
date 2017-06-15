@@ -1,0 +1,561 @@
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<title>MENDING:Project 2</title>
+
+<style>
+html,
+body {
+  margin: 0; padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.tooltip{
+  position:absolute;
+  z-index:99;
+  left:-9999px;
+  background-color:#ffffff;
+  padding: 0 5px 0 4px;
+  border-left:3px solid red;
+}
+.tooltip p{
+  margin:0; padding:0;
+  font: 200 15px 'Montserrat', sans-serif ;
+  color:#222;
+  background-color:#ffffff;
+  line-height: .8;
+}
+.Loop {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.wrapper {
+  width: 100%; height: 100%;
+  font-family: 'Lora', serif;
+  margin: 0 auto;
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: crosshair;
+}
+h1.inline {
+  display: inline;
+}
+h1 {
+  font-size: 100px; font-weight: 700;
+  position: relative;
+  color: #fff; text-align: center;
+}
+/* parallax scrolling background */
+.parallaxLayer {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.parallaxLayer_base {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  z-index: 4;
+}
+.parallaxLayer_back {
+  -webkit-transform: translateZ(-300px) scale(0);
+  transform: translateZ(-300px) scale(0);
+  z-index: 3;
+}
+.parallaxLayer_deep {
+  -webkit-transform: translateZ(-1.5px) scale(2.5);
+  transform: translateZ(-1.5px) scale(2.5);
+  z-index: 2;
+}
+.parallaxLayer_fore {
+  -webkit-transform: translateZ(-1px) scale(2);
+  transform: translateZ(-1px) scale(2);
+  z-index: 0;
+}
+.parallaxGroup {
+  position: relative;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+div.one {
+  top: 0; left: 0;
+  margin: 0; padding: 280px 0 0 0;
+  font: 100 60px 'Montserrat', sans-serif ;
+  width: 100%; height: 560px;
+  background-color: #666666;
+  color:#ffffff;
+  z-index: 99;
+  position: relative;
+  text-align: center;
+}
+div.two {
+  top: 0; left: 0;
+  margin: 0; padding:0;
+  width: 100%; height: 700px;
+  position: relative;
+  z-index: 0;
+}
+div.three {
+  top: 0; left: 0;
+  margin: 0; padding: 200px 0 0 0;
+  font: 700 120px 'Montserrat', sans-serif ;
+  width: 100%; height: 100px;
+  background-color: #ffffff;
+  text-align: center;
+}
+div.four {
+  top: 0; left: 0;
+  margin: 0; padding: 0;
+  width: 100%; height: 100px;
+  font: 700 120px 'Montserrat', sans-serif ;
+  background-color: #ffffff;
+}
+.wrapper h1 {
+  color: black; text-align: center;
+  background: white;
+}
+.wrapper h1:before {
+  content: attr(data-letters);
+  position: absolute;
+  left: 0; overflow: hidden;
+  width: 100%; height: 50%; color: white;
+  background-color: #ffffff;
+  text-shadow: 3px -2px 5px white, -3px 3px 4px white;
+  text-align: center;
+}
+.wrapper h1:after {
+  content: attr(data-letters);
+  position: absolute;
+  left: -10px; overflow: hidden;
+  width: 100%; height: 49%;
+  color: black;
+}
+h1.animated:after {
+  left: -20px;
+}
+h1.animated.hover:after {
+  left: 0;
+  cursor: cell;
+  -webkit-animation: fracture 10s ease;
+          animation: fracture 10s ease;
+}
+/*
+.move {
+  left: 0;
+  -webkit-animation: fracture 10s ease;
+          animation: fracture 10s ease;
+}*/
+/* delete keyframe animation & combine with jQuery hover for final form
+@-webkit-keyframes fracture {
+  0% { left: 0; } 50% { left: -20px; }
+}
+@keyframes fracture {
+  0% { left: 0; } 50% { left: -20px; }
+}*/
+div.five {
+  top: 0; left: 0;
+  margin: 300px 0 150px 0; padding: 0;
+  background-color: #ffffff;
+  width: 100%; height:700px;
+}
+div.five p {
+  margin:-15px -5px; padding:0;
+  color:black;
+  font: 700 62px 'Montserrat', sans-serif ;
+  letter-spacing: -2.5px;
+  background-color: #ffffff;
+  white-space: nowrap;
+  overflow:hidden;
+}
+/*
+.none {
+  display:none;
+}*/
+.add {
+  -webkit-animation: type 3s steps(40, end) infinite;
+          animation: type 3s steps(40, end) infinite;
+}
+@keyframes type{
+  from { width: 0; }
+  to { width: 100% } }
+@-webkit-keyframes type{
+  from { width: 0; }
+  to { width: 100% } }
+
+div.six {
+  top: 0; left: 0;
+  width: 100%; height: 560px;
+  margin: 0; padding: 250px 0 250px 0;
+  background-color: #000000;
+  font-family: 'Lora', serif;
+  position: relative;
+}
+.M { text-align: center; margin:0; width:200px; left: 200px; top: 0px; font-size: 80px; font-weight: 700;}
+.E { text-align: center; margin:0; width:160px; left: 420px; top: -270px; font-size: 200px; font-weight: 400; font-style: oblique;}
+.N { text-align: center; margin:0; width:160px; left: 620px; top: -300px; font-size: 120px; font-family: 'Montserrat'; font-weight: 900;}
+.D { text-align: center; margin:0; width:160px; left: 900px; top: -520px; font-size: 150px; font-family: 'Montserrat'; font-weight: 100;}
+.I { text-align: center; margin:0; width:160px; left: 320px; top: -390px; font-size: 130px; font-family: 'Montserrat'; }
+.N2 { text-align: center; margin:0; width:160px; left: 530px; top: -450px; font-size: 100px; font-weight:400;}
+.G { text-align: center; margin:0; width:160px; left: 800px; top: -670px; font-size: 200px; font-weight: 400;}
+.question { text-align: center; margin:0; width:160px; left: 620px; top: -1950px; font-size: 160px; font-weight: 500; font-family: 'Montserrat';}
+
+div.six h1 {
+  color: white; text-align: center;
+  background: black;
+}
+div.six h1:before {
+  content: attr(data-letters);
+  position: absolute;
+  left: 0; overflow: hidden;
+  background: black;
+  width: 100%; height: 50%; color: black;
+  text-shadow: 3px -2px 5px black, -3px 3px 4px black;
+  text-align: center;
+}
+div.six h1:after {
+  content: attr(data-letters);
+  position: absolute;
+  background: black;
+  left: -10px; overflow: hidden;
+  width: 100%; height: 49%;
+  color: white;
+}
+div.six h1.animated:after {
+  left: -20px;
+}
+div.six h1.animated.hover:after {
+  left: 0;
+  cursor: cell;
+  -webkit-animation: fracture 10s ease;
+          animation: fracture 10s ease;
+}
+div.seven {
+  top: 0; left: 0;
+  margin: 0; padding: 120px 0 120px 0;
+  width: 100%; height: 560px;
+  background-color: #666666;
+    position: relative;
+}
+div.seven a.one {
+  left: -240px; top: 0px;
+  font-size: 80px;
+}
+div.seven a.two {
+  left: 0px; top: -10px;
+}
+div.seven a.three {
+  left: -130px; top: -40px;
+  font-size: 70px;
+}
+div.seven a.four {
+  left: 200px; top: -100px;
+  font-size: 100px;
+}
+.flipped {
+	min-height: 150px;
+	background: #666666;
+	margin: 0; padding: 0;
+	z-index: 20;
+	position: relative;
+	text-align: center;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-transform: translate3d(0,0,0); /* Solves Safari bug because of SVG clipping mask */
+}
+.link {
+	color: #888888;
+  background: #666666;
+  outline: none;
+  text-decoration: none;
+  position: relative;
+  font: 900 60px 'Lora', serif;
+  line-height: 1;
+  display: inline-block;
+	/*text-transform: uppercase;*/
+	overflow: hidden;
+	padding: 10px 0;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+.link:hover {
+	color: #000000;
+  cursor: cell;
+}
+.link::before,
+.link::after {
+	content: '';
+	position: absolute;
+	width: 30%; height: 5px;
+	background: #666666;
+	bottom: 0; left: 35%;
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+.link::after {
+	background: #FFFFFF;
+  /*background: #ACD07A;*/
+	-webkit-transform: translate3d(-300%,0,0) scale3d(0,1,1);
+	transform: translate3d(-300%,0,0) scale3d(0,1,1);
+}
+.link:hover::before {
+	-webkit-transform: translate3d(300%,0,0) scale3d(0,1,1);
+	transform: translate3d(300%,0,0) scale3d(0,1,1);
+  cursor: cell;
+}
+.link:hover::after {
+	-webkit-transform: translate3d(0,0,0) scale3d(1,1,1);
+	transform: translate3d(0,0,0) scale3d(1,1,1);
+  cursor: cell;
+}
+.link span {
+	color: #888888;
+	display: inline-block;
+	position: relative;
+  -webkit-transform: perspective(1000px) rotate3d(0,1,0,180deg);
+  transform: perspective(1000px) rotate3d(0,1,0,180deg);
+	-webkit-transition: -webkit-transform 0.5s, color 0.5s;
+	transition: transform 0.5s, color 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+.link:hover span {
+	color: #fff;
+  -webkit-transform: perspective(1000px) rotate3d(0,1,0,0deg);
+	transform: perspective(1000px) rotate3d(0,1,0,0deg);
+  cursor: cell;
+}
+div.eight {
+  top: 0; left: 0;
+  height: 100%;
+  margin-top: 200px;
+  background-color: #ffffff;
+}
+div.eight h1.appreciate{
+  font: 100 60px 'Montserrat', sans-serif ;
+  overflow: hidden;
+  border-right: 2px solid red;
+  white-space: nowrap;
+  margin: 0 auto;
+  margin-bottom: 110px;
+  animation:
+    typing1 4s steps(30, end) infinite,
+    blink-caret .50s step-end infinite;
+}
+
+div.eight h1.respect {
+  font: 100 60px 'Montserrat', sans-serif ;
+  overflow: hidden;
+  border-right: 2px solid red;
+  white-space: nowrap;
+  margin: 0 auto;
+  margin-bottom: 110px;
+  animation:
+    typing2 4s steps(30, end) infinite ,
+    blink-caret .50s step-end infinite;
+}
+div.eight h1 span {
+  font-weight:700;
+}
+div.nine {
+  top: 0; left: 0;
+  height: 90%;
+  background-color: #ffffff;
+}
+div.nine h1 {
+  font: 100 60px 'Montserrat', sans-serif ;
+  overflow: hidden;
+  border-right: 10px solid red;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation:
+    typing3 10s steps(70, end) infinite,
+    blink-caret .50s step-end infinite;
+}
+/* The typing effect */
+@keyframes typing1 {
+  from { width: 0 } to { width: 58% }
+}
+@keyframes typing2 {
+  from { width: 49% } to { width: 0 }
+}
+@keyframes typing3 {
+  from { width: 0 } to { width: 83% }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent } 50% { border-color: red; }
+}
+::scrollbar {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+  <div class="wrapper Loop js-loop" id="hovertitle" title="Hover to MEND broken letters">
+    <div class="one">Life of STUFF</div>
+    <div class="parallaxGroup">
+      <div class="two parallaxLayer parallaxLayer_back"></div>
+  	  <div class="three parallaxLayer parallaxLayer_base">New</div>
+      <div class="four parallaxLayer parallaxLayer_deep"><h1 class="animated" data-letters="Broken"><span>Broken</span></h1></div>
+    </div>
+    <div class="five">
+      <p class="add">TRASHED TRASHED TRASHED TRASHED TRASHED</p>
+      <p class="add">SHED TRASHED TRASHED TRASHED TRASHED TR</p>
+      <p class="add">ED TRASHED TRASHED TRASHED TRASHED TRAS</p>
+      <p class="add">TRASHED TRASHED TRASHED TRASHED TRASHED</p>
+      <p class="add">SHED TRASHED TRASHED TRASHED TRASHED TR</p>
+      <p class="add">ED TRASHED TRASHED TRASHED TRASHED TRAS</p>
+      <p class="add">TRASHED TRASHED TRASHED TRASHED TRASHED</p>
+      <p class="add">SHED TRASHED TRASHED TRASHED TRASHED TR</p>
+      <p class="add">ED TRASHED TRASHED TRASHED TRASHED TRAS</p>
+      <p class="add">TRASHED TRASHED TRASHED TRASHED TRASHED</p>
+      <p class="add">SHED TRASHED TRASHED TRASHED TRASHED TR</p>
+      <p class="add">ED TRASHED TRASHED TRASHED TRASHED TRAS</p>
+      <p class="add">TRASHED TRASHED TRASHED TRASHED TRASHED</p>
+      <p class="add">SHED TRASHED TRASHED TRASHED TRASHED TR</p>
+      <p class="add">ED TRASHED TRASHED TRASHED TRASHED TRAS</p>
+    </div>
+    <div class="six">
+      <h1 class="animated M" data-letters="M"><span>M</span></h1>
+      <h1 class="animated E" data-letters="e"><span>e</span></h1>
+      <h1 class="animated N" data-letters="n"><span>n</span></h1>
+      <h1 class="animated D" data-letters="D"><span>D</span></h1>
+      <h1 class="animated I" data-letters="i"><span>i</span></h1>
+      <h1 class="animated N2" data-letters="N"><span>N</span></h1>
+      <h1 class="animated G" data-letters="g"><span>g</span></h1>
+      <h1 class="animated question" data-letters="?"><span>?</span></h1>
+    </div>
+    <div class="seven">
+      <div class="flipped" style="letter-spacing:-3px;">
+        <a class="link one" href="#">
+          <span style="font:100 80px 'Montserrat';letter-spacing:-3px;">Me</span><span style="font-weight:400;">nd</span>in<span style="font-family:'Lora', serif; font-weight:700;">g</span></a>
+      </div>
+      <div class="flipped">
+        <a class="link two" href="#">
+          <span style="font-family:'Montserrat';font-weight:800;">mA</span>ke<span>s</span></a>
+      </div>
+      <div class="flipped">
+        <a class="link three" href="#">
+          <span style="font-family:'Montserrat';font-weight:100;">Th</span>ing<span style="font-weight:700;font-style:oblique">S</span></a>
+      </div>
+      <div class="flipped">
+        <a class="link four" href="#">
+          <span style="font-weight:700;font-size:50px;">uni</span><span style="font-family:'Montserrat';font-weight:100;letter-spacing:-7px;">qu</span><span style="font-size:130px;font-style:oblique;font-weight:400;">E</span></a>
+      </div>
+    </div>
+    <div class="eight">
+        <h1 class="animated appreciate" data-letters="Mend Appreciate Respect"><span>Mend Appreciate Respect</span></h1>
+        <br>
+        <h1 class="animated respect" data-letters="Trashed Throw away"><span>Trashed Throw away</span></h1>
+    </div>
+    <div class="nine">
+        <h1 class="animated" data-letters="Treat STUFF like Human RELATIONSHIP"><span>Treat STUFF like Human RELATIONSHIP</span></h1>
+    </div>
+    <div class="one is-clone">Life of STUFF</div>
+  </div>
+  <!--for scroll looping effect-->
+  <script type="text/javascript">
+  var doc = window.document,
+  context = doc.querySelector('.js-loop'),
+  clones = context.querySelectorAll('.is-clone'),
+  disableScroll = false,
+  scrollHeight = 0,
+  scrollPos = 0,
+  clonesHeight = 0,
+  i = 0;
+  function getScrollPos () {
+  return (context.pageYOffset || context.scrollTop) - (context.clientTop || 0);
+  }
+  function setScrollPos (pos) {
+  context.scrollTop = pos;
+  }
+  function getClonesHeight () {
+  clonesHeight = 0;
+  for (i = 0; i < clones.length; i += 1) {
+    clonesHeight = clonesHeight + clones[i].offsetHeight;
+  }
+  return clonesHeight;
+  }
+  function reCalc () {
+  scrollPos = getScrollPos();
+  scrollHeight = context.scrollHeight;
+  clonesHeight = getClonesHeight();
+  if (scrollPos <= 0) {
+    setScrollPos(1); // Scroll 1 pixel to allow upwards scrolling
+  }
+  }
+  function scrollUpdate () {
+  if (!disableScroll) {
+    scrollPos = getScrollPos();
+    if (clonesHeight + scrollPos >= scrollHeight) {
+      // Scroll to the top when you’ve reached the bottom
+      setScrollPos(1); // Scroll down 1 pixel to allow upwards scrolling
+      disableScroll = true;
+    } else if (scrollPos <= 0) {
+      // Scroll to the bottom when you reach the top
+      setScrollPos(scrollHeight - clonesHeight);
+      disableScroll = true;
+    }
+  }
+  if (disableScroll) {
+    // Disable scroll-jumping for a short time to avoid flickering
+    window.setTimeout(function () {
+      disableScroll = false;
+    }, 40);
+  }
+  }
+  window.requestAnimationFrame(reCalc);
+  context.addEventListener('scroll', function () {
+  window.requestAnimationFrame(scrollUpdate);
+  }, false);
+  window.addEventListener('resize', function () {
+  window.requestAnimationFrame(reCalc);
+  }, false);
+  </script>
+  <!--hover effects on broken letters-->
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $(".animated").hover(
+      function () {
+        $(this).addClass('hover');
+      },
+      function () {
+        $(this).removeClass('hover');
+      });
+    });
+    </script>
+    <!--Tooltip following mouse cursor w/ fadein fadeout effect-->
+    <script type="text/javascript">
+    function simple_tooltip(hovertitle, tooltip){
+     $(hovertitle).each(function(i){
+    		$("body").append("<div class='"+tooltip+"' id='"+tooltip+i+"'><p>"+$(this).attr('title')+"</p></div>");
+    		var my_tooltip = $("#"+tooltip+i);
+
+    		$(this).removeAttr("title").mouseover(function(){
+    				my_tooltip.css({opacity:.8, display:"none"}).fadeIn(800);
+    		}).mousemove(function(kmouse){
+    				my_tooltip.css({left:kmouse.pageX+15, top:kmouse.pageY+15});
+    		}).mouseout(function(){
+    				my_tooltip.fadeOut(800);
+    		});
+    	});
+    }
+    $(document).ready(function(){
+    	 simple_tooltip("#hovertitle","tooltip");
+    });
+</script>
+</body>
+</html>
